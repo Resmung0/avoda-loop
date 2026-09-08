@@ -1,0 +1,118 @@
+[project]
+name = "avoda-loop"
+version = "0.1.0"
+authors = [
+    { name = "Marcos De Assis", email = "mg.21191077@gmail.com" }
+]
+description = "An autonomous multi-agent system that continuously discovers opportunities, evaluates profile fit, and generates tailored application assets."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "api",
+    "cv-pipeline",
+    "dynaconf>=3.3.5",
+    "loguru>=0.7.3",
+]
+
+[dependency-groups]
+analysis = [
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.9",
+    "seaborn>=0.13.2",
+]
+dev = [
+    "commitizen>=4.18.0",
+    "poethepoet>=0.48.0",
+    "prek>=0.5.2",
+    "pydoclint>=0.9.1",
+    "ruff>=0.16.6",
+    "ty>=0.0.78",
+    "zuban>=0.9.3",
+]
+test = [
+    "hypothesis>=6.167.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "pytest-xdist>=3.8.0",
+    "testcontainers>=4.15.0",
+]
+
+[tool.uv]
+managed = true
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+api = { workspace = true }
+cv-pipeline = { workspace = true }
+
+[tool.ruff]
+target-version = "py312"
+show-fixes = true
+
+[tool.ruff.lint]
+pydocstyle.convention = "google"
+select = [
+    "D", # Docstrings rules
+    "F", # Prevent real runtime bugs (Pyflakes)
+    "W", # pycodestyle warnings (PEP8)
+    "E", # pycodestyle errors (PEP8)
+    "I", # Automatically organize imports (Isort)
+    "UP", # Update syntax to newer Python versions
+    "PL", # Code smells and design issues based on Pylint rules
+    "T201", # Forbid use of print (prefer logging)
+    "B", # Detect code patterns prone to errors (flake8-bugbear)
+    "SIM", # Detect code that can be simplified (flake8-simplify)
+    "ARG", # Detect unused parameters (flake8-unused-arguments)
+    "C901", # Detect complex functions (flake8-complexity)
+    "C4", # Help write better list comprehensions (flake8-comprehensions)
+    "RET", # Detect inconsistent returns (flake8-return)
+    "PIE", # Detect code potentially vulnerable to speculative execution attacks (flake8-pie)
+    "S", # Detect common security issues (bandit)
+    "DTZ", # Detect timezone-related issues (flake8-datetimez)
+    "N", # Detect naming issues (pep8-naming)
+    "TRY" # Detecta problemas relacionados à exceptions
+]
+
+ignore = [
+    "D107", # Ignore required docstring in __init__
+    "D104", # Ignore docstring in public method
+    "ANN002", # Ignora tipagem para *args
+    "ANN003", # Ignora tipagem para *kwargs
+    "E501" # Ignora limite de comprimento de linha (para docstrings e outros casos específicos)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "S101"] # Ignora a necessidade de docstrings em testes
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pydoclint]
+style = 'google'
+check-style-mismatch = true
+treat-property-methods-as-class-attributes = true
+skip-checking-short-docstrings = false
+exclude = '\.git|\.venv|.pytest_cache|.ruff_cache|data|notebooks'
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: unit tests",
+    "integration: integration tests",
+]
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true

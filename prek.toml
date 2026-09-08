@@ -1,0 +1,31 @@
+default_language_version.python = "3.12"
+
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "no-commit-to-branch", args = ["-b", "main", "-b", "dev", "-b", "qa"] },
+  { id = "detect-private-key" },
+  { id = "check-added-large-files", args = ["--maxkb=100"] },
+  { id = "check-merge-conflict" },
+  { id = "end-of-file-fixer" },
+  { id = "check-toml" },
+  { id = "check-yaml" },
+]
+
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "debug-statements" },
+  { id = "name-tests-test" },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "clean", name = "clean cache files", language = "system", entry = "uv run poe clean", pass_filenames = false },
+  { id = "format", name = "format code", language = "system", entry = "uv run poe format", pass_filenames = false },
+  { id = "lint", name = "lint code", language = "python", entry = "uv run poe lint", pass_filenames = false },
+  { id = "unit-test", name = "run unit tests", language = "system", entry = "uv run poe test" },
+  { id = "integration-test", name = "run integration tests", language = "system", entry = "uv run poe test --mode integration" },
+]
