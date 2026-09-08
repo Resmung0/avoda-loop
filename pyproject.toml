@@ -23,6 +23,7 @@ analysis = [
 ]
 dev = [
     "commitizen>=4.18.0",
+    "dvc>=3.67.1",
     "poethepoet>=0.48.0",
     "prek>=0.5.2",
     "pydoclint>=0.9.1",
