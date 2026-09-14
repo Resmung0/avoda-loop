@@ -22,6 +22,7 @@ analysis = [
     "seaborn>=0.13.2",
 ]
 dev = [
+    "codespell>=2.4.3",
     "commitizen>=4.18.0",
     "dvc>=3.67.1",
     "poethepoet>=0.48.0",
@@ -29,10 +30,14 @@ dev = [
     "pydoclint>=0.9.1",
     "ruff>=0.16.6",
     "ty>=0.0.78",
+    "typos>=1.50.1",
+    "vulture>=2.16",
     "zuban>=0.9.3",
 ]
 test = [
+    "blockbuster>=1.5.27",
     "hypothesis>=6.167.1",
+    "polyfactory>=3.3.0",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
@@ -76,19 +81,19 @@ select = [
     "S", # Detect common security issues (bandit)
     "DTZ", # Detect timezone-related issues (flake8-datetimez)
     "N", # Detect naming issues (pep8-naming)
-    "TRY" # Detecta problemas relacionados à exceptions
+    "TRY" # Detect issues related to exceptions
 ]
 
 ignore = [
     "D107", # Ignore required docstring in __init__
     "D104", # Ignore docstring in public method
-    "ANN002", # Ignora tipagem para *args
-    "ANN003", # Ignora tipagem para *kwargs
-    "E501" # Ignora limite de comprimento de linha (para docstrings e outros casos específicos)
+    "ANN002", # Ignore typing for *args
+    "ANN003", # Ignore typing for *kwargs
+    "E501" # Ignore line length limit (for docstrings and other specific cases)
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D", "S101"] # Ignora a necessidade de docstrings em testes
+"tests/*" = ["D", "S101"] # Ignore the need for docstrings in tests
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -117,3 +122,8 @@ markers = [
 [tool.coverage.report]
 fail_under = 0
 show_missing = true
+
+[tool.vulture]
+make_whitelist = true
+sort_by_size = true
+verbose = true
