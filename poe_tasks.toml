@@ -107,10 +107,12 @@ heading = "Tasks related to validation"
 heading = "Tasks related to processing pipelines"
     
     [tool.poe.groups.pipeline.tasks.run-pipeline]
-    help = "Run the data processing pipeline"
-    cmd = "python src/project_name/pipeline/main.py --config $config_file"
+    help = "Run the PDF data processing pipeline"
+    script = "packages.cv_pipeline.src.avoda_loop.pipeline:run_pipeline"
+    #cmd = "python packages/cv_pipeline/src/avoda_loop/pipeline.py --input $input --output $output"
     args = [
-        { name = "config_file", help = "Path to the pipeline configuration file", type = "string" }
+        { name = "pdf_path", help = "Path to the input PDF file", default = "data/Profile.pdf", type = "string" },
+        { name = "output_path", help = "Path to the output JSON file", default = "data/profile_extracted_pdfplumber.json", type = "string" }
     ]
 
 [tool.poe.groups.deploy]

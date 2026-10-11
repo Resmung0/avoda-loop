@@ -5,6 +5,7 @@ description = "A pipeline that tailors resumes to job openings using LLMs."
 readme = "README.md"
 dependencies = [
     "dspy>=3.3.1",
+    "pdfplumber>=0.11.9",
     "prefect>=3.8.5",
     "rendercv[full]>=2.8",
 ]
