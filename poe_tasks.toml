@@ -103,15 +103,14 @@ heading = "Tasks related to validation"
         { name = "message", help = "Commit message to check", type = "string" }
     ]
 
-[tool.poe.groups.pipeline]
-heading = "Tasks related to processing pipelines"
-    
-    [tool.poe.groups.pipeline.tasks.run-pipeline]
-    help = "Run the data processing pipeline"
-    cmd = "python src/project_name/pipeline/main.py --config $config_file"
-    args = [
-        { name = "config_file", help = "Path to the pipeline configuration file", type = "string" }
-    ]
+[tool.poe.tasks.run-pipeline]
+help = "Run the CV PDF to JSON parsing pipeline"
+cmd = "python -m avoda_loop.pipeline $pdf $output"
+env = { PYTHONPATH = "packages/cv_pipeline/src" }
+args = [
+    { name = "pdf", help = "Path to the input PDF file", type = "string", default = "data/Profile.pdf" },
+    { name = "output", help = "Path to the output JSON file", type = "string", default = "data/profile_extracted_pymupdf.json" }
+]
 
 [tool.poe.groups.deploy]
 heading = "Deploy related tasks"

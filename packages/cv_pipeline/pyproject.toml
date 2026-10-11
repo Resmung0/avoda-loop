@@ -6,6 +6,7 @@ readme = "README.md"
 dependencies = [
     "dspy>=3.3.1",
     "prefect>=3.8.5",
+    "pymupdf>=1.24",
     "rendercv[full]>=2.8",
 ]
 
