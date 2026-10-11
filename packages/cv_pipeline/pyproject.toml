@@ -6,6 +6,7 @@ readme = "README.md"
 dependencies = [
     "dspy>=3.3.1",
     "prefect>=3.8.5",
+    "pypdf>=5.0.0",
     "rendercv[full]>=2.8",
 ]
 

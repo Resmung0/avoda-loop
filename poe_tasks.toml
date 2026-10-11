@@ -107,10 +107,11 @@ heading = "Tasks related to validation"
 heading = "Tasks related to processing pipelines"
     
     [tool.poe.groups.pipeline.tasks.run-pipeline]
-    help = "Run the data processing pipeline"
-    cmd = "python src/project_name/pipeline/main.py --config $config_file"
+    help = "Run the PDF→JSON extraction pipeline (pypdf)"
+    cmd = "cv_pipeline --pdf ${pdf} --output ${output}"
     args = [
-        { name = "config_file", help = "Path to the pipeline configuration file", type = "string" }
+        { name = "pdf", help = "Path to the source PDF file", default = "data/Profile.pdf", type = "string" },
+        { name = "output", help = "Destination JSON file", default = "data/profile_extracted_pypdf.json", type = "string" }
     ]
 
 [tool.poe.groups.deploy]
